@@ -31,6 +31,10 @@ class DateUtils {
 
     Week week;
 
+    if(baseDate.day % 7 == 0) {
+      _weekIndexController++;
+    }
+
     //Fill the weeks list for each 7 days or when the month ends
     if(
       _days.length % 7 == 0 ||
@@ -49,7 +53,7 @@ class DateUtils {
       week = Week(days: weekDays, weekIndex: _weekIndexController);
 
       // Add the week to the weeks list, if it's not present with the same week index
-      if(!_weeks.any((w) => w.weekIndex == _weekIndexController)) {
+      if(!_weeks.any((w) => ((w.weekIndex == _weekIndexController) && weekDays.length == w.days.length))) {
         _weeks.add(week);
       }
 
@@ -58,9 +62,6 @@ class DateUtils {
 
     // print('${formatter.format(baseDate)} - ${day.name}');
     baseDate = baseDate.add(Duration(days: 1));
-    if(baseDate.day % 7 == 0) {
-      _weekIndexController++;
-    }
   }
 
     int monthWeeksCount = (baseDate.day / 7).ceil();
