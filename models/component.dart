@@ -7,5 +7,5 @@ class Component {
   const Component({required this.name, required this.availableDays});
 
   @override
-  String toString() => 'TeamComponent($name: $name)';
+  String toString() => 'TeamComponent(name: $name)';
 }

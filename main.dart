@@ -54,6 +54,7 @@ main() {
         availableDays: [WeekDayNames.domingo, WeekDayNames.sabado]),
   ];
 
+  // Test choose a component
   Day day = Day(
     monthDayNumber: testDate.day,
     weekDayName: NameUtils.getWeekDayName(testDate.weekday).name,
@@ -63,7 +64,10 @@ main() {
 
   print(component);
 
-  print(DateUtils.buildMonth(month: 8, year: 2022, length: 31));
+  // Test build a month
+  Month? month = DateUtils.buildMonth(month: 9, year: 2022);
+
+  print(month);
 
   // TODO: Implementar método para escolher componentes para todos os dias desejados de um mês
   // TODO: Implementar estrutura flexível para permitir personalizar os critérios de escolha dos dias de um mês

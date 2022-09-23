@@ -1,3 +1,5 @@
+import 'component.dart';
+
 class Month {
   final String name;
   final List<Week> weeks;
@@ -23,12 +25,15 @@ class Week {
 class Day {
   final int monthDayNumber;
   final String weekDayName;
+  final Component? component;
 
   Day({
     required this.monthDayNumber,
     required this.weekDayName,
+    this.component,
   });
 
   @override
-  String toString() => '\nDay($monthDayNumber - $weekDayName)';
+  String toString() =>
+      '\nDay($monthDayNumber - $weekDayName [${component?.name ?? '----'}])';
 }
