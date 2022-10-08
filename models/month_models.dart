@@ -1,7 +1,8 @@
+import '../enums/date_names.dart';
 import 'component.dart';
 
 class Month {
-  final String name;
+  final MonthDayNames name;
   final List<Week> weeks;
 
   Month({
@@ -10,7 +11,7 @@ class Month {
   });
 
   @override
-  String toString() => 'Month($name\n[$weeks])';
+  String toString() => 'Month(${name.name}\n[$weeks])';
 }
 
 class Week {
@@ -24,16 +25,20 @@ class Week {
 
 class Day {
   final int monthDayNumber;
-  final String weekDayName;
+  final WeekDayNames weekDayName;
   final Component? component;
+  final DateTime? dateTimeRepresentation;
 
   Day({
     required this.monthDayNumber,
     required this.weekDayName,
+    this.dateTimeRepresentation,
     this.component,
   });
 
   @override
   String toString() =>
-      '\nDay($monthDayNumber - $weekDayName [${component?.name ?? '----'}])';
+  weekDayName == WeekDayNames.invalid?
+   '\nDay( ############ )':
+      '\nDay($monthDayNumber - ${weekDayName.name} [${component?.name ?? '----'}])';
 }

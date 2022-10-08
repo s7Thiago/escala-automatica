@@ -57,7 +57,7 @@ main() {
   // Test choose a component
   Day day = Day(
     monthDayNumber: testDate.day,
-    weekDayName: NameUtils.getWeekDayName(testDate.weekday).name,
+    weekDayName: NameUtils.getWeekDayName(testDate.weekday),
   );
 
   Component? component = ToolUtils.chooseTeamComponent(team, day);
@@ -65,7 +65,7 @@ main() {
   print(component);
 
   // Test build a month
-  Month? month = DateUtils.buildMonth(month: 9, year: 2022);
+  Month? month = DateUtils.buildMonth(month: 2, year: 2022);
 
   print(month);
 

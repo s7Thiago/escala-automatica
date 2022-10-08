@@ -1,3 +1,4 @@
+import '../enums/date_names.dart';
 import '../models/month_models.dart';
 import './name_utils.dart';
 
@@ -11,7 +12,7 @@ class DateUtils {
   }
 
     static Month? buildMonth({int month = 1, int year = 1990}) {
-    String monthName = NameUtils.getMonthName(month).name;
+    MonthDayNames monthName = NameUtils.getMonthName(month);
     List<Week> _weeks = [];
     List<Day> _days = [];
     int _weekIndexController = 0;
@@ -19,13 +20,17 @@ class DateUtils {
     // DateFormat formatter = DateFormat('yyyy-MM-dd');
 
     // Fill days to complete week correctly
-    List<Day> fillDays = List.generate(baseDate.weekday, (index) => Day(monthDayNumber: 0, weekDayName: NameUtils.getWeekDayName(0).name));
+    List<Day> fillDays = List.generate(baseDate.weekday, (index) => Day(monthDayNumber: 0, weekDayName: NameUtils.getWeekDayName(0)));
     _days.addAll(fillDays);
 
   while(baseDate.month == month) {
 
     // Creating day object and adding to days list
-    Day day = Day(monthDayNumber: baseDate.day, weekDayName: NameUtils.getWeekDayName(baseDate.weekday).name);
+    Day day = Day(
+      monthDayNumber: baseDate.day,
+      weekDayName: NameUtils.getWeekDayName(baseDate.weekday),
+      dateTimeRepresentation: baseDate
+      );
 
     _days.add(day);
 
@@ -66,6 +71,9 @@ class DateUtils {
 
     int monthWeeksCount = (baseDate.day / 7).ceil();
     print('weeks in $monthName: $monthWeeksCount');
+
+    // Fill the last week with void days
+    _weeks.last.days.addAll(List.generate(7 - _weeks.last.days.last.dateTimeRepresentation!.weekday, (index) => Day(monthDayNumber: 0, weekDayName: NameUtils.getWeekDayName(0))));
 
     return Month(name: monthName, weeks: _weeks);
   }
